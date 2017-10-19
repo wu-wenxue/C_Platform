@@ -12,7 +12,8 @@ HEADERS += \
     source/utility.h \
     source/config.h \
     source/thread.h \
-    test/test.h
+    test/test.h \
+    source/plarform.h
 
 SOURCES += \
     main.cpp \
@@ -25,7 +26,8 @@ SOURCES += \
     source/shell.c \
     source/utility.c \
     source/config.c \
-    test/test.c
+    test/test.c \
+    source/platform.c
 
 LIBS +=  -lcurl -lcrypto
 #QMAKE_CFLAGS += -lssh -lcurl -lcrypto

@@ -1,0 +1,13 @@
+#ifndef PLARFORM_H
+#define PLARFORM_H
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+
+#ifdef __cplusplus
+}
+#endif
+#endif // PLARFORM_H
+

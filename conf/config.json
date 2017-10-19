@@ -1,0 +1,6 @@
+{
+	"logLevel": "debug",
+	"logFile":"./platform.log",
+	"logFileMaxSize":102400,
+	"singlelogMaxSize":1024
+}
