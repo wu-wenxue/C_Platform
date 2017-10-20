@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-#include "config.h"
+//#include "config.h"
 
 #define LOG_UNDEF   -1
 #define LOG_D       1   /* debug */
@@ -31,10 +31,10 @@ extern "C" {
 
 typedef struct
 {
-    char* logFile;
-    int logLevel;
-    int singleLogSize;
-    int logFileMaxSize;
+    char*   logFile;
+    int     logLevel;
+    int     singleLogSize;
+    int     logFileMaxSize;
 }LogConfig;
 
 void        loggerInitialize(LogConfig* config);

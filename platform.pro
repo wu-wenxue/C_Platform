@@ -1,7 +1,7 @@
-INCLUDEPATH += source
+INCLUDEPATH += source \
+            += test
 
 HEADERS += \
-    source/mylogger.h \
     source/buffer.h \
     source/http.h \
     source/common.h \
@@ -13,21 +13,22 @@ HEADERS += \
     source/config.h \
     source/thread.h \
     test/test.h \
-    source/platform.h
+    source/platform.h \
+    source/ipccommon.h \
+    source/fmacros.h
 
 SOURCES += \
     main.cpp \
-    source/mylogger.c \
     source/buffer.c \
     source/http.c \
     source/logger.c \
-    source/test.c \
     source/parson.c \
     source/shell.c \
     source/utility.c \
     source/config.c \
     test/test.c \
-    source/platform.c
+    source/platform.c \
+    source/ipccommon.c
 
 LIBS +=  -lcurl -lcrypto
 #QMAKE_CFLAGS += -lssh -lcurl -lcrypto

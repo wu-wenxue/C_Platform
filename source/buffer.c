@@ -46,7 +46,7 @@ int bufferPrepareLenSpace(Buffer* buffer, const char* s, size_t size) {
     char *data;
     
     if (buffer == NULL) return -1;
-    data = watcher_realloc(buffer->data, buffer->used + size+1);
+    data = realloc(buffer->data, buffer->used + size+1);
     if (data == NULL) return -1;
     buffer->data = data;
     if (s) {

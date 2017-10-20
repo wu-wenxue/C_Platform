@@ -48,7 +48,7 @@ void loggerInitialize(LogConfig *config)
 {
     pthread_mutex_init(&logMutex, NULL);
 
-    logFile = config->logFilePath;
+    logFile = config->logFile;
     logLevel = config->logLevel;
     logFileMaxSize = config->logFileMaxSize;
     singleLogMaxSize = config->singleLogSize;
@@ -99,12 +99,12 @@ void loggerLog(int level, const char* fmt, ...)
     pthread_mutex_lock(&logMutex);
     if(stat(logFile, &state) == 0)
     {
-        if(state.st_size >= logMaxSize)
+        if(state.st_size >= logFileMaxSize)
         {
-            remove(logfile);
+            remove(logFile);
         }
     }
-    if((file = fopen(logfile, "a")) == NULL)
+    if((file = fopen(logFile, "a")) == NULL)
     {
         pthread_mutex_unlock(&logMutex);
         return;

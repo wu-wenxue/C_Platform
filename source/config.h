@@ -7,6 +7,7 @@ extern "C" {
 
 #define CONFIG_FILE "./conf/config.json"
 
+
 typedef struct
 {
     LogConfig logConfig;

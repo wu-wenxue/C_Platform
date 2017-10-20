@@ -9,6 +9,7 @@ extern "C" {
 typedef struct
 {
     Config config;
+
 }PlatForm;
 
 void platformInit(PlatForm* platForm);

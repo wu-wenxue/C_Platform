@@ -20,11 +20,11 @@ extern "C" {
 #include <stdlib.h>
 #include <stdio.h>
 
-#define watcher_tracer      printf
-#define watcher_malloc      malloc
-#define watcher_calloc      calloc
-#define watcher_realloc     realloc
-#define watcher_free        free
+//#define watcher_tracer      printf
+//#define watcher_malloc      malloc
+//#define watcher_calloc      calloc
+//#define watcher_realloc     realloc
+//#define watcher_free        free
 
 #ifndef BOOL
 typedef unsigned char       BOOL;
