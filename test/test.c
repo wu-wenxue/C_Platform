@@ -10,11 +10,7 @@ static char* generateLocationString() {
     JSON_Value *jsonValue;
     JSON_Object *jsonObject;
 
-//    configUpdateIMEI(&agent.config, 0);
-//    if (agent.config.imei == NULL) {
-//        loggerLog(LOG_D, "generateUpgradeString, IMEI null");
-//        return NULL;
-//    }
+
 
 
     jsonValue = json_value_init_object();
