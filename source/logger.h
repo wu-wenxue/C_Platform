@@ -29,8 +29,15 @@ extern "C" {
 
 #define LOG_MAX_MSG     2048
 
+typedef struct
+{
+    char* logFile;
+    int logLevel;
+    int singleLogSize;
+    int logFileMaxSize;
+}LogConfig;
 
-void        loggerInitialize(Config* config);
+void        loggerInitialize(LogConfig* config);
 int         loggerGetLevel(const char* name);
 const char* loggerGetName(int level);
 void        loggerLog(int level, const char* fmt, ...);

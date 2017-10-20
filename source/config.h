@@ -3,13 +3,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#include "logger.h"
 
-#define CONFIG_FILE ""
+#define CONFIG_FILE "./conf/config.json"
 
 typedef struct
 {
-    char* logFilePath;
-    int logLevel;
+    LogConfig logConfig;
+
 }Config;
 
 void  configInitialize(Config *config);

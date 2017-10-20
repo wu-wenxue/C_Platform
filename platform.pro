@@ -13,7 +13,7 @@ HEADERS += \
     source/config.h \
     source/thread.h \
     test/test.h \
-    source/plarform.h
+    source/platform.h
 
 SOURCES += \
     main.cpp \

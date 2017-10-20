@@ -2,6 +2,7 @@
 #include "parson.h"
 #include <stdlib.h>
 #include "logger.h"
+#include "utility.h"
 
 void configInitialize(Config *config)
 {
@@ -20,7 +21,8 @@ void configUnInitialize(Config *config)
 
 void configLoad(Config *config)
 {
-    const char* cstr;
+    const char* cstr = NULL;
+    int value = 0;
     JSON_Value* configValue;
     JSON_Object* configObject;
 
@@ -44,6 +46,29 @@ void configLoad(Config *config)
         return;
     }
 
+    cstr = json_object_get_string(configObject,"logLevel");
+    if(NULL != cstr && strlen(cstr) > 0)
+    {
+        config->logConfig.logLevel = loggerGetLevel(cstr);
+    }
+
+    value = json_object_get_number(configObject,"logFileMaxSize");
+    if(0 != value)
+    {
+        config->logConfig.logFileMaxSize = value * 1024;
+    }
+
+    cstr = json_object_get_string(configObject,"logFile");
+    if(NULL != cstr && strlen(cstr) > 0)
+    {
+        config->logConfig.logFile = stringCopy(cstr);
+    }
+
+    value = json_object_get_number(configObject,"singleLogMaxSize");
+    if(0 != value)
+    {
+        config->logConfig.singleLogSize = value;
+    }
 
 
     json_value_free(configValue);

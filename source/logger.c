@@ -38,16 +38,22 @@ struct log_pair
 };
 
 pthread_mutex_t logMutex;
-char* logfile = NULL;
-int logMaxSize = 2048*1024;
+char* logFile = NULL;
+int logFileMaxSize = 2048*1024;
 int logLevel = LOG_D;
+int singleLogMaxSize = 1024;
+char* log = NULL;
 
-void loggerInitialize(Config* config)
+void loggerInitialize(LogConfig *config)
 {
     pthread_mutex_init(&logMutex, NULL);
 
-    logfile = config->logFilePath;
+    logFile = config->logFilePath;
     logLevel = config->logLevel;
+    logFileMaxSize = config->logFileMaxSize;
+    singleLogMaxSize = config->singleLogSize;
+
+    log = (char*)malloc(singleLogMaxSize);
 }
 
 
@@ -91,7 +97,7 @@ void loggerLog(int level, const char* fmt, ...)
         return;
     }
     pthread_mutex_lock(&logMutex);
-    if(stat(logfile, &state) == 0)
+    if(stat(logFile, &state) == 0)
     {
         if(state.st_size >= logMaxSize)
         {
@@ -119,8 +125,8 @@ void loggerLog(int level, const char* fmt, ...)
     
     if(file)
     {
-        int off;
-        char log[LOG_MAX_MSG];
+        int off;       
+        memset(log,0,singleLogMaxSize);
         struct timeval tv;
         struct tm *stm;
         va_list ap;
@@ -147,10 +153,10 @@ void loggerLog(int level, const char* fmt, ...)
         }
         gettimeofday(&tv, NULL);
         stm = localtime(&tv.tv_sec);
-        off = strftime(log+1, sizeof(log)-1, " %Y-%m-%d %H:%M:%S.", stm);
-        snprintf(log+off+1, sizeof(log)-off-1, "%03d ", (int)tv.tv_usec/1000);
+        off = strftime(log + 1, singleLogMaxSize - 1, " %Y-%m-%d %H:%M:%S.", stm);
+        snprintf(log + off + 1, singleLogMaxSize - off - 1, "%03d ", (int)tv.tv_usec/1000);
         va_start(ap, fmt);
-        vsnprintf(log+off+5, sizeof(log)-off-5, fmt, ap);
+        vsnprintf(singleLogMaxSize + off + 5, singleLogMaxSize - off - 5, fmt, ap);
         va_end(ap);
         //if(level == LOG_D) printf("%s\n", log);
         fprintf(file, "%s\n",log);

@@ -4,7 +4,14 @@
 extern "C" {
 #endif
 
+#include "config.h"
 
+typedef struct
+{
+    Config config;
+}PlatForm;
+
+void platformInit(PlatForm* platForm);
 
 #ifdef __cplusplus
 }
